@@ -59,12 +59,54 @@ class Like {
         this.avatarUrl = avatarUrl;
     }
 }
+class LastLikeInfo {
+    // ваш код
+    String user;
+    Integer hours;
+    Integer minutes;
+
+    public LastLikeInfo(String user, Integer hours, Integer minutes) {
+        this.user = user;
+        this.hours = hours;
+        this.minutes = minutes;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public Integer getHours() {
+        return hours;
+    }
+
+    public void setHours(Integer hours) {
+        this.hours = hours;
+    }
+
+    public Integer getMinutes() {
+        return minutes;
+    }
+
+    public void setMinutes(Integer minutes) {
+        this.minutes = minutes;
+    }
+}
 
 public class Practicum {
 
 
     // IOException могут сгенерировать методы create() и bind(...)
     public static void main(String[] args) throws IOException {
+        String lastLikeInfoStr = "{ \"user\": \"Алексей\", \"hours\": 12, \"minutes\": 30}";
+        Gson gson = new Gson();
+        LastLikeInfo lastLikeInfo = gson.fromJson(lastLikeInfoStr, LastLikeInfo.class);// код десериализации
+
+
+
         LikesInfo likesInfo = new LikesInfo();
         likesInfo.setRepostsCount(10);
         likesInfo.setHasOwnerLiked(true);
@@ -75,5 +117,8 @@ public class Practicum {
         });
 
         // код сериализации
+        String jsonString = gson.toJson(likesInfo);
+
+        System.out.println(jsonString);
     }
 }
